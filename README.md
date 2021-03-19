@@ -1,5 +1,5 @@
 # CouponAPI
-1. 개발 프레임워크
+### 개발 프레임워크
 #### Frameworks : Spring Boot, Mybatis,
 #### DB : MySQL
  
