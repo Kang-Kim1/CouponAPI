@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.restapi.couponapi.dao.CouponDAO">
+	<!-- Q1  -->
+	<select id="countCoupon" resultType="int" parameterType="string">
+		<!-- 코드가 중복되는 쿠폰 개수 조회 -->
+		SELECT COUNT(*) FROM coupons WHERE c_couponCode = #{code}
+	</select>
+	<insert id="addCoupon" parameterType="string">
+		<!-- 새로운 쿠폰 추가 -->
+		INSERT INTO coupons
+		(c_couponCode) VALUES (#{code});
+	</insert>
+
+	<!-- Q2 -->
+	<select id="getUnassignedCouponCode" resultType="string">
+		<!-- 지급되지 않은 가장 오래된 쿠폰코드 1개 조회 -->
+		SELECT c_couponCode FROM COUPONS WHERE c_assignedTo IS NULL ORDER BY c_regiDate	LIMIT 1 ;
+	</select>
+    <update id="updateAssignedCoupon" parameterType="string">
+    	<!-- 쿠폰 지급 후, 지급일 기준일 8일이 되는 시점에 쿠폰 만료, 지급된 사용자명 수정 -->
+    	UPDATE coupons SET c_expDate = DATE(DATE_ADD(NOW(), INTERVAL 8 DAY)), c_assignedTo = 'API_USER' WHERE c_couponCode = #{code}
+    </update>
+    <select id="getCoupon" resultType="com.restapi.couponapi.dto.CouponDTO" parameterType="string">
+ 		<!-- 지급 이후 업데이트된 쿠폰 조회 -->
+		SELECT * FROM COUPONS WHERE c_couponCode = #{code};
+	</select>
+    
+    <!-- Q3 -->
+	<select id="getAssignedCoupons" resultType="com.restapi.couponapi.dto.CouponDTO">
+		<!-- 지급되지 않은 상태의 모든 쿠폰 조회 -->
+		SELECT * FROM coupons WHERE c_assignedTo IS NOT NULL;
+	</select>
+	
+	<!-- Q4 -->
+	<update id="useCoupon" parameterType="string">
+		<!-- 쿠폰 사용 시, 지급된 뒤 사용하지 않은 쿠폰 확인 후 사용 처리  -->
+		UPDATE coupons SET c_isUsed = TRUE WHERE c_couponCode = #{code} AND c_assignedTo IS NOT NULL AND c_isUsed = FALSE;
+	</update>
+	
+	<!-- Q5 -->
+	<update id="cancelCoupon" parameterType="string">
+		<!-- 쿠폰 취소 시, 지급된 뒤 사용한 쿠폰 확인 후 사용 처리  -->
+		UPDATE coupons SET c_isUsed = FALSE WHERE c_couponCode = #{code} AND c_assignedTo IS NOT NULL AND c_isUsed = TRUE;
+	</update>
+	
+	<!-- Q6 -->
+	<select id="getExpiredCoupons" resultType="com.restapi.couponapi.dto.CouponDTO">
+		<!-- 조회 당일 날짜와 만료일이 동일한 모든 쿠폰 조회 -->
+		SELECT * FROM coupons WHERE DATE(c_expDate) = DATE(NOW());
+	</select>
+	
+	<!-- Q7 -->
+	<select id="getCouponsToBeExpired" resultType="com.restapi.couponapi.dto.CouponDTO">
+		<!-- 조회 당일 기준 3일 뒤에 만료되는 모든 쿠폰 조회 -->
+		SELECT * FROM coupons WHERE DATE(c_expDate) = DATE(DATE_ADD(NOW(), INTERVAL 3 DAY));
+	</select>
+	
+	
+	<delete id="deleteCoupon" parameterType="string">
+		DELETE FROM coupons WHERE c_couponCode = #{code};
+	</delete>
+</mapper>
