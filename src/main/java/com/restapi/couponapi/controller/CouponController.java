@@ -5,8 +5,6 @@ import java.util.List;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +17,6 @@ import com.restapi.couponapi.util.APIUtility;
 @MapperScan(basePackages = "com.restapi.couponapi.dao")
 @RequestMapping("/coupon")
 public class CouponController {
-
 	@Autowired
 	private CouponDAO couponDAO;
 
@@ -110,7 +107,7 @@ public class CouponController {
 	 */
 	@RequestMapping("/expired")
 	public String getExpiredCoupon() {
-		String output = "<html><body>" + "<b>사용자들에게 지급된 쿠폰은 아래와 같습니다.</b><br>";
+		String output = "<html><body>" + "<b>오늘 만료된 쿠폰은 아래와 같습니다.</b><br>";
 		List<CouponDTO> expiredCoupons = couponDAO.getExpiredCoupons();
 
 		for (CouponDTO coupon : expiredCoupons) {

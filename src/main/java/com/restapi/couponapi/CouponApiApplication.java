@@ -13,10 +13,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
-public class CouponApiApplication {
+public class CouponAPIApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CouponApiApplication.class, args);
+		SpringApplication.run(CouponAPIApplication.class, args);
 	}
 	
 	

@@ -1,14 +1,18 @@
 package com.restapi.couponapi;
 
 import static org.junit.Assert.assertTrue;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.Calendar;
 import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -16,20 +20,35 @@ import com.restapi.couponapi.dao.CouponDAO;
 import com.restapi.couponapi.dto.CouponDTO;
 
 @SpringBootTest
-class CouponApiApplicationTests {
+@AutoConfigureMockMvc
+class CouponAPIApplicationTests {
 	
 	final String testCode ="TESTCODE";
 
 	@Autowired
+	CouponDAO couponDAO;
+	
+	@Autowired
 	private MockMvc mockMvc;
 	
 	@Test 
-	void testURL() {
-		mockMvc.perform(MockMvcRequestBuilders.get("/coupon/get")).andDo(print());
+	void testMappingRegi() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders
+				.get("/coupon/regi")
+				.accept(MediaType.APPLICATION_JSON))
+				.andDo(print())
+				.andExpect(status().isOk());
 	}
 	
-	@Autowired
-	CouponDAO couponDAO;
+	@Test 
+	void testMappingNew() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders
+				// 1개 추가 테스트
+				.get("/coupon/new?N=1")
+				.accept(MediaType.APPLICATION_JSON))
+				.andDo(print())
+				.andExpect(status().isOk());
+	}
 	
 	// Test 1 : 쿠폰 정상 입력 테스트 
 	@Test
