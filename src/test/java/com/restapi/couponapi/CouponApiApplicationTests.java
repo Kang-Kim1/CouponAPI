@@ -31,6 +31,7 @@ class CouponAPIApplicationTests {
 	@Autowired
 	private MockMvc mockMvc;
 	
+	// Test 0 : RequestMapping 테스트
 	@Test 
 	void testMappingRegi() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders

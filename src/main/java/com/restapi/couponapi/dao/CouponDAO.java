@@ -17,7 +17,7 @@ public interface CouponDAO {
 	public CouponDTO getCoupon(String code);
 	public void updateAssignedCoupon(String code);
 	
-	// Q3. 사용자에게 지급된 쿠폰을 조회하는 API를 구현하세요.
+	// Q3
 	public List<CouponDTO> getAssignedCoupons();
 	
 	// Q4

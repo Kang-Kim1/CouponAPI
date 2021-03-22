@@ -11,6 +11,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+// String Boot Starter Class 
 @SpringBootApplication
 @EnableScheduling
 public class CouponAPIApplication {

@@ -3,6 +3,7 @@ package com.restapi.couponapi.util;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 public class APIUtility {
 	// 랜덤한 8자리 쿠폰코드를 생성하기 위한 Utility Method
 	public static String generateCode(int couponSize) {
