@@ -10,21 +10,21 @@
             * 전체적인 Application 디자인을 위해 정확히 문제 파악
         2. Schema 설계
             * 모든 기능을 수행할 수 있도록 아래와 같이 테이블 구현
-  3. Project Package 설계
-    > 아래와 같이 Package 설계
-  4. Mapper(Query) 작성
-    > 입, 출력값 및 제약을 고려한 Query문 작성
-  3. HTTP Request Controller 구현
-    > 각 문항에 대한 URI Handler 구현
-  4. Unit Test 진행
-    > 입, 출력 테스트 및 각 기능에 대한 Unit Test 진행(JUnit)
+        3. Project Package 설계
+            * 아래와 같이 Package 설계
+        4. Mapper(Query) 작성
+            * 입, 출력값 및 제약을 고려한 Query문 작성
+        5. HTTP Request Controller 구현
+            * 각 문항에 대한 URI Handler 구현
+        6. Unit Test 진행
+            * 입, 출력 테스트 및 각 기능에 대한 Unit Test 진행(JUnit)
    
 ### 3. 실행방법
-  1. Project root에 위치한 coupons.sql 실행하여 DB&Table 생성
-  2. src>main>resources>application.properties 파일에서 uername, password 변경
-  3. CouponAPI 어플리케이션 실행
-  4. 아래 URI를 통해 각 문제에 대한 결과 확인
-    1. 랜덤 코드 N개 생성 (input : int N)  
+   1. Project root에 위치한 coupons.sql 실행하여 DB&Table 생성
+   2. src>main>resources>application.properties 파일에서 uername, password 변경
+   3. CouponAPI 어플리케이션 실행
+   4. 아래 URI를 통해 각 문제에 대한 결과 확인
+    * 랜덤 코드 N개 생성 (input : int N)  
       > http://localhost:8080/coupon/new?N={N}
     2. 생성된 쿠폰 지급 (output : String couponCode)  
       > http://localhost:8080/coupon/regi
