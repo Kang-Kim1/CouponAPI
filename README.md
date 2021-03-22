@@ -10,8 +10,10 @@
             * 전체적인 Application 디자인을 위해 정확히 문제 파악
         2. Schema 설계
             * 모든 기능을 수행할 수 있도록 아래와 같이 테이블 구현
+            ![](https://user-images.githubusercontent.com/20007119/111994769-7c61c880-8b5b-11eb-8e37-d43331887174.png)
         3. Project Package 설계
             * 아래와 같이 Package 설계
+            ![](https://user-images.githubusercontent.com/20007119/111994765-7b309b80-8b5b-11eb-9eb4-bac169582b2b.png)
         4. Mapper(Query) 작성
             * 입, 출력값 및 제약을 고려한 Query문 작성
         5. HTTP Request Controller 구현
