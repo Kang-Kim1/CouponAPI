@@ -1,8 +1,8 @@
 # CouponAPI
 
 ### 1. 개발 프레임워크
- > Framework : Spring Boot(v2.5), MyBatis, JUnit
- > DB : MySQL
+   - Framework : Spring Boot(v2.5), MyBatis, JUnit
+   - DB : MySQL
 ### 2. 문제해결 전략
  > Architecture : DTO&DAO를 활용한 RESTful API
  > 개발 순서
