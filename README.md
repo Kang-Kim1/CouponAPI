@@ -38,5 +38,5 @@
             > http://localhost:8080/coupon/cancel?code={couponCode}
         * 지급된 쿠폰 중, 당일 만료된 쿠폰 조회  
             > http://localhost:8080/coupon/expired
-        * 쿠폰 만료 3일 전 안내 메세지 발송 (매일 00시에 자동 발송)  
+        * 쿠폰 만료 3일 전 안내 메세지 발송 (매일 에 자동 발송)  
             > http://localhost:8080/coupon/noti
