@@ -23,7 +23,7 @@
    1. Project root에 위치한 coupons.sql 실행하여 DB&Table 생성
    2. src>main>resources>application.properties 파일에서 uername, password 변경
    3. CouponAPI 어플리케이션 실행
-   4. 아래 URI를 통해 각 문제에 대한 결과 확인
+   4. 아래 URI를 통해 각 문제에 대한 결과 확인  
     * 랜덤 코드 N개 생성 (input : int N)  
         > http://localhost:8080/coupon/new?N={N}
     * 생성된 쿠폰 지급 (output : String couponCode)  
