@@ -6,8 +6,8 @@
 ### 2. 문제해결 전략
    - Architecture : DTO&DAO를 활용한 RESTful API
    - 개발 순서
-      1. 각 문제의 입력 및 출력값 확인
-        * 전체적인 Application 디자인을 위해 정확히 문제 파악
+        1. 각 문제의 입력 및 출력값 확인
+            * 전체적인 Application 디자인을 위해 정확히 문제 파악
   2. Schema 설계
     > 모든 기능을 수행할 수 있도록 아래와 같이 테이블 구현
   3. Project Package 설계
