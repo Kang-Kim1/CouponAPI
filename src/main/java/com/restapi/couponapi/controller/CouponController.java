@@ -120,7 +120,7 @@ public class CouponController {
 	 
 	/* 7. 발급된 쿠폰중 만료 3일전 사용자에게 메세지(“쿠폰이 3일 후 만료됩니다.”)를 발송하는 기능을 구현하세요. 
 	 *	 > 매일 00:00에 3일 뒤 만료되는 쿠폰을 대상으로 쿠폰이 등록된 사용자에게 만료 안내
-	 */
+	 */ 
 	@RequestMapping(value = "/noti", method = RequestMethod.GET)
 	@Scheduled(cron = "0 0 0 * * *")
 	public void sendExpNoti() {
