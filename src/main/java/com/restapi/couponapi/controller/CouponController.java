@@ -22,7 +22,7 @@ public class CouponController {
 	private CouponDAO couponDAO;
 
 	/*1. 랜덤한 코드의 쿠폰을 N개 생성하여 데이터베이스에 보관하는 API를 구현하세요.
-	 *  > 쿠폰 코드  형식 : 8자리 String이며 대문자 알파뱃과 숫자로 구성
+	 *  > 쿠폰 코드  형식 : 8자리 String이며 대문자 알파뱃과 숫자로 구성 
 	 *  > 8자리 쿠폰 코드 생성 후, 중복 확인을 거친 뒤에 등록
 	 */
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
