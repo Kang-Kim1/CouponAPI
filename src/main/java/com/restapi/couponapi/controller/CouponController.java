@@ -6,6 +6,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +25,7 @@ public class CouponController {
 	 *  > 쿠폰 코드  형식 : 8자리 String이며 대문자 알파뱃과 숫자로 구성
 	 *  > 8자리 쿠폰 코드 생성 후, 중복 확인을 거친 뒤에 등록
 	 */
-	@RequestMapping("/new")
+	@RequestMapping(value = "/new", method = RequestMethod.POST)
 	public String createCoupons(@RequestParam("N") int N) {
 		final int codeLength = 8;
 
@@ -46,7 +47,7 @@ public class CouponController {
 	 *   > 생성된 쿠폰 중, 지급되지 않은 가장 오래된(생성일 기준) 쿠폰  지급
 	 *   > 쿠폰은 지급된 날 기준 8일 뒤 자정에 만료(ex. 2021-03-21 15:00 지급 => 2021-03-29 00:00에 만료)
 	*/
-	@RequestMapping("/regi")
+	@RequestMapping(value = "/regi", method = RequestMethod.PATCH)
 	public String getCoupon() {
 		final String codeToBeAssigned = couponDAO.getUnassignedCouponCode();
 
@@ -63,7 +64,7 @@ public class CouponController {
 	/* 3. 사용자에게 지급된 쿠폰을 조회하는 API를 구현하세요.
 	 *   > 지급 완료된 모든 쿠폰의 코드와 만료일 조회
 	 */
-	@RequestMapping("/assigned")
+	@RequestMapping(value = "/assigned", method = RequestMethod.GET)
 	public String getAllAssignedCoupon() {
 		List<CouponDTO> usedCoupons = couponDAO.getAssignedCoupons();
 		String output = "<html><body>" + "<b>사용자들에게 지급된 쿠폰은 아래와 같습니다.</b><br>";
@@ -77,7 +78,7 @@ public class CouponController {
 	 /*  4. 지급된 쿠폰중 하나를 사용하는 API를 구현하세요. (쿠폰 재사용은 불가)
 	  *    > 지급된 쿠폰 중, 입력된 쿠폰 코드가 존재할 경우 사용 사용 처리, code가 존재하지 않거나 이미 사용 중일 경우 사용 불가 안내 
 	  */
-	@RequestMapping("/use")
+	@RequestMapping(value = "/use", method = RequestMethod.PATCH)
 	public String useCoupon(@RequestParam("code") String code) {
 		int result = couponDAO.useCoupon(code);
 
@@ -91,7 +92,7 @@ public class CouponController {
 	/* 5. 지급된 쿠폰중 하나를 사용 취소하는 API를 구현하세요. (취소된 쿠폰 재사용 가능)
 	 *   > 지급된 쿠폰 중, 입력된 쿠폰 코드가 존재할 경우 사용 취소, code가 존재하지 않거나 아직 사용되지 않은 경우 취소 불가 안내 
 	 */
-	@RequestMapping("/cancel")
+	@RequestMapping(value = "/cancel", method = RequestMethod.PUT)
 	public String cancelCoupon(@RequestParam("code") String code) {
 		int result = couponDAO.cancelCoupon(code);
 
@@ -105,7 +106,7 @@ public class CouponController {
 	/* 6. 발급된 쿠폰중 당일 만료된 전체 쿠폰 목록을 조회하는 API를 구현하세요.
 	 *   > 만료일이 당일과 일치하는 모든 쿠폰 조회
 	 */
-	@RequestMapping("/expired")
+	@RequestMapping(value = "/expired", method = RequestMethod.GET)
 	public String getExpiredCoupon() {
 		String output = "<html><body>" + "<b>오늘 만료된 쿠폰은 아래와 같습니다.</b><br>";
 		List<CouponDTO> expiredCoupons = couponDAO.getExpiredCoupons();
@@ -120,7 +121,7 @@ public class CouponController {
 	/* 7. 발급된 쿠폰중 만료 3일전 사용자에게 메세지(“쿠폰이 3일 후 만료됩니다.”)를 발송하는 기능을 구현하세요. 
 	 *	 > 매일 00:00에 3일 뒤 만료되는 쿠폰을 대상으로 쿠폰이 등록된 사용자에게 만료 안내
 	 */
-	@RequestMapping("/noti")
+	@RequestMapping(value = "/noti", method = RequestMethod.GET)
 	@Scheduled(cron = "0 0 0 * * *")
 	public void sendExpNoti() {
 		List<CouponDTO> expCoupons = couponDAO.getExpiredCoupons();
