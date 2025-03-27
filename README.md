@@ -4,7 +4,7 @@
    - Framework : Spring Boot(v2.5), MyBatis, JUnit
    - DB : MySQL
 ### 2. 문제해결 전략
-   - Architecture : DTO&DAO를 활용한 RESTful API
+   - Architecture : Layered Architecture (Controller - Service - DAO), RESTful API 기반 설계, DTO 활용한 계층 간 명확한 데이터 전달 구조
    - 개발 순서
         1. 각 문제의 입력 및 출력값 확인
             * 전체적인 Application 디자인을 위해 정확히 문제 파악
